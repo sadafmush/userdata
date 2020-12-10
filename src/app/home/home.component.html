@@ -1,0 +1,34 @@
+﻿<h1>Hi {{currentUser.firstName}}!</h1>
+<p>You're logged in!! </p>
+<nav class="navbar">
+<input type="form-control" type="text" name="firstName" placeholder="enter first name" [(ngModel)]="firstName" (ngModelChange)="search()">
+</nav>
+<div>
+<p>Date: {{today | date : 'd/M/y'}} 
+ {{today | date:'H:mm:ss'}}
+<select [(ngModel)]="format">
+<option value="1" >Select time format </option>
+<option value="hh">1-12</option>
+<option value="H">0-23</option>
+</select>
+</p>
+</div>
+<script>  </script>
+<table border="5px" cellpadding="5px" cellspacing="10px" align="center">
+    <thead style="background-color: wheat">
+        <tr>
+            <th (click)="sort('id')"> UserId&nbsp;<i class="fa fa-sort"></i></th>
+            <th>User Name</th>
+            <th>User Role</th>
+        </tr>
+    </thead>
+        <tbody>
+            <tr
+             *ngFor="let user of users | orderBy: key: reverse |paginate:{itemsPerPage:5,currentPage:p};">
+                <td >{{user.id}}</td>
+                <td >{{user.username}} </td>
+                <td>{{user.role}}</td>
+            </tr>
+        </tbody> 
+</table>
+<pagination-controls (pageChange)="p=$event"></pagination-controls>
